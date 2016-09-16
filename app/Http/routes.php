@@ -11,23 +11,14 @@
 |
 */
 
+use App\Model\Blog;
+
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
-
-Route::get('/contact', [
-	"uses" => "ajgroups/Http/Controllers/ContactController@contact_get",
-	'as' => 'contact.get'
-]);
-
-Route::post('/contact', [
-	"uses" => 'ajgroups/Http/Controllers/ContactController@contact_post',
-	'as' => 'contact.post'
-]);
-
-// Routes should be simple as they can, in initial phases just use controller, then use middleware too.
-// Now on 'GET: /contact' request, it will be taken to authcontroller's contactus() method.
-// In your case, it can be ContactController@contactUs
-// Keep method's name in camel cases and variable's name in snake case.
-Route::get('contact', 'AuthController@contactus');
+Route::get('index', 'AuthController@home');
+Route::get('home', 'AuthController@home');
+Route::get('aboutus', 'AuthController@aboutus');
+Route::get('contactus', 'AuthController@contactus');
+Route::get('blogs/{id}','BlogController@view');
 
